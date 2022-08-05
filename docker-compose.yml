@@ -9,6 +9,8 @@ services:
         volumes:
             - ./:${WORKING_DIR}
         container_name: sonder_app
+        links:
+            - db
 
     webserver:
         image: nginx:alpine
@@ -23,14 +25,28 @@ services:
         container_name: sonder_webserver
 
     db:
-        image: postgres:14.1-alpine
+        image: mysql:8
         restart: always
         environment:
-            - POSTGRES_DB=${DB_DATABASE}
-            - POSTGRES_USER=${DB_USER}
-            - POSTGRES_PASSWORD=${DB_PASSWORD}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
         ports:
-            - ${DB_PORT}:5432
+            - ${DB_PORT}:3306
         volumes:
-            - ./docker/database/volumes:/var/lib/postgresql/data
+            - mysql-volume:/var/lib/mysql
         container_name: sonder_db
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: sonder_phpmyadmin
+        restart: always
+        ports:
+            - ${PHPMYADMIN_PORT}:80
+        environment:
+            PMA_HOST: sonder_db
+            PMA_ARBITRARY: 1
+
+volumes:
+    mysql-volume:

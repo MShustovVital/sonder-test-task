@@ -2,15 +2,15 @@
 
 namespace App\Services\Cube;
 
-use App\Models\Cube as CubeModel;
 use App\Services\Cube\Entities\Cube;
 use App\Services\Cube\Entities\Cube as CubeEntity;
 use App\Services\Cube\Contracts\Rotation;
 use App\Services\Cube\Enums\CubeRotation;
+use Illuminate\Database\Eloquent\Model;
 
 final class CubeService implements Rotation
 {
-    public function __construct(private readonly CubeModel $cubeModel)
+    public function __construct(private readonly Model $model)
     {
 
     }
@@ -40,9 +40,9 @@ final class CubeService implements Rotation
         return $this->getCube()['data'];
     }
 
-    private function getCube():CubeModel
+    private function getCube():Model
     {
-        return $this->cubeModel->firstOrFail();
+        return $this->model->firstOrFail();
     }
 
 }

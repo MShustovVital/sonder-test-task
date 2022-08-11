@@ -10,8 +10,7 @@ use Tests\TestCase;
 
 class CubeTest extends TestCase
 {
-    /** @test */
-    public function is_cube_generates_valid()
+    public function testIsCubeGeneratesValid()
     {
         $expected = [CubeFace::Down->value =>
             [CubeColor::Blue->value, CubeColor::Blue->value, CubeColor::Blue->value,
@@ -47,8 +46,7 @@ class CubeTest extends TestCase
         $this->assertEquals($expected, $cube);
     }
 
-    /** @test */
-    public function is_cube_turn_left_face_up_valid()
+    public function testIsCubeTurnLeftFaceUpValid()
     {
         $expected = [CubeFace::Down->value =>
             [CubeColor::Yellow->value, CubeColor::Yellow->value, CubeColor::Yellow->value,
@@ -82,12 +80,11 @@ class CubeTest extends TestCase
                 ],];
         $cube = (new Cube())->rotate(CubeRotation::LeftUp);
         $this->assertInstanceOf(Cube::class,$cube);
-        $this->assertIsArray($cube->get());
-        $this->assertEquals($expected, $cube->get());
+        $this->assertIsArray($cube->getStructure());
+        $this->assertEquals($expected, $cube->getStructure());
     }
 
-    /** @test */
-    public function is_cube_turn_middle_face_up_valid()
+    public function testIsCubeTurnMiddleFaceUpValid()
     {
         $expected = [CubeFace::Down->value =>
             [CubeColor::Blue->value, CubeColor::Blue->value, CubeColor::Blue->value,
@@ -121,12 +118,11 @@ class CubeTest extends TestCase
                 ],];
         $cube = (new Cube())->rotate(CubeRotation::MiddleUp);
         $this->assertInstanceOf(Cube::class,$cube);
-        $this->assertIsArray($cube->get());
-        $this->assertEquals($expected, $cube->get());
+        $this->assertIsArray($cube->getStructure());
+        $this->assertEquals($expected, $cube->getStructure());
     }
 
-    /** @test */
-    public function is_cube_turn_right_face_up_valid()
+    public function testIsCubeTurnRightFaceUpValid()
     {
         $expected = [CubeFace::Down->value =>
             [CubeColor::Blue->value, CubeColor::Blue->value, CubeColor::Blue->value,
@@ -160,14 +156,12 @@ class CubeTest extends TestCase
                 ],];
         $cube = (new Cube())->rotate(CubeRotation::RightUp);
         $this->assertInstanceOf(Cube::class,$cube);
-        $this->assertIsArray($cube->get());
-        $this->assertEquals($expected, $cube->get());
+        $this->assertIsArray($cube->getStructure());
+        $this->assertEquals($expected, $cube->getStructure());
     }
 
-    /** @test */
-    public function is_cube_not_generated_empty()
+    public function testIsCubeNotGeneratedEmpty()
     {
-        $this->assertNotEmpty((new Cube())->get());
+        $this->assertNotEmpty((new Cube())->getStructure());
     }
-
 }

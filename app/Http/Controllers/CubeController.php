@@ -10,25 +10,20 @@ use Illuminate\Http\JsonResponse;
 
 final class CubeController extends Controller
 {
-    public function __construct(private CubeService $cubeService)
-    {
-
-    }
-
-    public function index(): JsonResponse
+    public function index(CubeService $cubeService): JsonResponse
     {
         try {
-            $cube = $this->cubeService->show();
+            $cube = $cubeService->show();
             return $this->sendResponse(['cube'=>$cube]);
         } catch (ModelNotFoundException) {
             return $this->sendError();
         }
     }
 
-    public function rotate(RotateRequest $request): JsonResponse
+    public function rotate(RotateRequest $request,CubeService $cubeService): JsonResponse
     {
         $data = CubeRequestDto::transform($request->validated());
-        $cube = $this->cubeService->rotate($data->side);
+        $cube = $cubeService->rotate($data->side);
         return $this->sendResponse(['cube'=>$cube]);
     }
 }

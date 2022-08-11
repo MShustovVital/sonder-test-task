@@ -12,7 +12,7 @@ class CubeControllerTest extends TestCase
     /** @test */
     public function it_display_cube_route_available()
     {
-       Cube::factory()->count(1)->create();
+       Cube::factory()->createOne();
        $response = $this->get(route('cube.show'));
        $response->assertOk();
        $response->assertJsonStructure([
@@ -37,7 +37,7 @@ class CubeControllerTest extends TestCase
     /** @test */
     public function it_can_rotate_cube()
     {
-        Cube::factory()->count(1)->create();
+        Cube::factory()->createOne();
         $response = $this->post(route('cube.rotate'),['side'=>'L']);
         $response->assertOk();
         $response->assertJsonStructure([
@@ -51,7 +51,7 @@ class CubeControllerTest extends TestCase
     /** @test */
     public function it_can_not_rotate_cube_with_invalid_side()
     {
-        Cube::factory()->count(1)->create();
+        Cube::factory()->createOne();
         $response = $this->post(route('cube.rotate'),['side'=>'Left']);
         $response->assertStatus(422);
         $response->assertJsonStructure([

@@ -7,16 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class CubeFaceTest extends TestCase
 {
-    /** @test */
-    public function is_cube_face_return_valid_list_of_vertical_faces()
+    public function testIsCubeFaceReturnValidListOfVerticalFaces()
     {
         $verticalFacesNames = CubeFace::getVerticalFacesNames();
         $this->assertIsArray($verticalFacesNames);
         $this->assertEquals([CubeFace::Down->value,CubeFace::Front->value,CubeFace::Up->value,CubeFace::Back->value],$verticalFacesNames);
     }
 
-    /** @test */
-    public function is_cube_face_return_valid_list_of_horizontal_faces()
+    public function testIsCubeFaceReturnValidListOfHorizontalFaces()
     {
         $horizontalFacesNames = CubeFace::getHorizontalFacesNames();
         $this->assertIsArray($horizontalFacesNames);

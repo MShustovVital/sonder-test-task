@@ -20,7 +20,7 @@ final class CubeRequestDto implements DTO
     protected static function filterCubeRotationByValue(string $side): CubeRotation
     {
         $cubeRotationCases = CubeRotation::cases();
-        return collect($cubeRotationCases)->filter(function ($data) use ($side){
+        return collect($cubeRotationCases)->search(function ($data) use ($side){
            return $data->value=== $side;
         })->first();
     }
